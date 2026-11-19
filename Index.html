@@ -1,0 +1,40 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Johns Liste</title>
+</head>
+<body>
+
+  <h1>Johns Liste</h1>
+
+  <input type="text" id="name" placeholder="Dein Name" maxlength="20">
+
+  <button onclick="eintragen()">Eintragen</button>
+
+  <ol id="liste"></ol>
+
+  <script>
+    function eintragen() {
+      const feld = document.getElementById("name");
+      const name = feld.value.trim();
+
+      if (name.length === 0) return;
+
+      const eintrag = document.createElement("li");
+      const zeit = new Date().toLocaleString("de-DE", {
+        dateStyle: "short",
+        timeStyle: "short"
+      });
+
+      eintrag.textContent = name + " – " + zeit;
+
+      document.getElementById("liste").appendChild(eintrag);
+      feld.value = "";
+    }
+  </script>
+
+</body>
+</html>
