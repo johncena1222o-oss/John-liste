@@ -1,40 +1,50 @@
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Johns Liste</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      padding: 20px;
+    }
+
+    input, button {
+      padding: 10px;
+      margin: 5px;
+    }
+  </style>
 </head>
 <body>
-
   <h1>Johns Liste</h1>
 
-  <input type="text" id="name" placeholder="Dein Name" maxlength="20">
+  <input id="name" maxlength="20" placeholder="Dein Name">
+  <button onclick="addName()">Eintragen</button>
 
-  <button onclick="eintragen()">Eintragen</button>
-
-  <ol id="liste"></ol>
+  <ol id="list"></ol>
 
   <script>
-    function eintragen() {
-      const feld = document.getElementById("name");
-      const name = feld.value.trim();
+    function addName() {
+      const input = document.getElementById("name");
+      const name = input.value.trim();
 
-      if (name.length === 0) return;
+      if (!name) return;
 
-      const eintrag = document.createElement("li");
-      const zeit = new Date().toLocaleString("de-DE", {
-        dateStyle: "short",
-        timeStyle: "short"
-      });
+      const entry = document.createElement("li");
+      const now = new Date();
 
-      eintrag.textContent = name + " – " + zeit;
+      entry.textContent = name + " – " +
+        now.toLocaleDateString("de-DE") + " " +
+        now.toLocaleTimeString("de-DE", {
+          hour: "2-digit",
+          minute: "2-digit"
+        });
 
-      document.getElementById("liste").appendChild(eintrag);
-      feld.value = "";
+      document.getElementById("list").appendChild(entry);
+      input.value = "";
     }
   </script>
-
 </body>
 </html>
